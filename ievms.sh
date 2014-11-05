@@ -404,6 +404,9 @@ build_ievm() {
         log "Creating ${vm} VM (disk: ${disk_path})"
         VBoxManage import "${ova}" --vsys 0 --vmname "${vm}" --unit "${unit}" --disk "${disk_path}"
 
+        log "Setting ${vm} VM's memory to 1024MB and video memory to 128MB"
+        VBoxManage modifyvm "${vm}" --memory 1024 --vram 128
+
         log "Building ${vm} VM"
         declare -F "build_ievm_ie${1}" && "build_ievm_ie${1}"
 
